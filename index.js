@@ -538,7 +538,16 @@ HtmlWebpackTagsPlugin.prototype.apply = function (compiler) {
       // HtmlWebPackPlugin - new
       if (compilation.hooks.htmlWebpackPluginBeforeHtmlGeneration) {
         compilation.hooks.htmlWebpackPluginBeforeHtmlGeneration.tapAsync('htmlWebpackTagsPlugin', onBeforeHtmlGeneration);
-        compilation.hooks.htmlWebpackPluginAlterAssetTags.tapAsync('htmlWebpackTagsPlugin', onAlterAssetTag);
+        compilation.hooks.htmlWebpackPluginAlterAssetTags.tapAsync('htmlWebpackTagsPlugin', (htmlPluginData, callback) => {
+          if ('function' === typeof htmlPluginData.then) {
+            // thenable
+            htmlPluginData.then(res => {
+              onAlterAssetTag(res, callback);
+            });
+          } else {
+            onAlterAssetTag(htmlPluginData, callback);
+          }
+        });
       } else {
         const HtmlWebpackPlugin = require(htmlPluginName);
         if (HtmlWebpackPlugin.getHooks) {
