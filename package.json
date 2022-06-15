@@ -1,5 +1,5 @@
 {
-  "name": "@fortnight/html-webpack-tags-plugin",
+  "name": "html-webpack-tags-plugin-fortnight",
   "version": "2.0.17",
   "description": "lets you define html tags to inject with html-webpack-plugin.Hank's sp ver.",
   "main": "index.js",
