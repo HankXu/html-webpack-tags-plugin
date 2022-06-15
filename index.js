@@ -539,7 +539,7 @@ HtmlWebpackTagsPlugin.prototype.apply = function (compiler) {
       if (compilation.hooks.htmlWebpackPluginBeforeHtmlGeneration) {
         compilation.hooks.htmlWebpackPluginBeforeHtmlGeneration.tapAsync('htmlWebpackTagsPlugin', onBeforeHtmlGeneration);
         compilation.hooks.htmlWebpackPluginAlterAssetTags.tapAsync('htmlWebpackTagsPlugin', (htmlPluginData, callback) => {
-          if ('function' === typeof htmlPluginData.then) {
+          if (typeof htmlPluginData.then === 'function') {
             // thenable
             htmlPluginData.then(res => {
               onAlterAssetTag(res, callback);
